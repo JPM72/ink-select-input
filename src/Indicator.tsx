@@ -4,13 +4,14 @@ import figures from 'figures';
 
 export type Props = {
 	readonly isSelected?: boolean;
+	readonly highlightColor?: string;
 };
 
-function Indicator({isSelected = false}: Props) {
+function Indicator({isSelected = false, highlightColor = 'cyan'}: Props) {
 	return (
 		<Box marginRight={1}>
 			{isSelected ? (
-				<Text color="cyan">{figures.pointer}</Text>
+				<Text color={highlightColor}>{figures.pointer}</Text>
 			) : (
 				<Text> </Text>
 			)}

@@ -50,6 +50,8 @@ type Props<V> = {
 	 * Function to call when user highlights an item. Item object is passed to that function as an argument.
 	 */
 	readonly onHighlight?: (item: Item<V>) => void;
+
+	readonly highlightColor?: string;
 };
 
 export type Item<V> = {
@@ -67,6 +69,7 @@ function SelectInput<V>({
 	limit: customLimit,
 	onSelect,
 	onHighlight,
+	highlightColor = 'cyan',
 }: Props<V>) {
 	const hasLimit =
 		typeof customLimit === 'number' && items.length > customLimit;
@@ -188,8 +191,8 @@ function SelectInput<V>({
 				return (
 					// @ts-expect-error - `key` can't be optional but `item.value` is generic T
 					<Box key={item.key ?? item.value}>
-						{React.createElement(indicatorComponent, {isSelected})}
-						{React.createElement(itemComponent, {...item, isSelected})}
+						{React.createElement(indicatorComponent, {isSelected, highlightColor})}
+						{React.createElement(itemComponent, {...item, isSelected, highlightColor})}
 					</Box>
 				);
 			})}
